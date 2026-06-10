@@ -1,0 +1,61 @@
+
+@startuml
+entity "CUSTOMERS" as customers {
+  * id : VARCHAR(36)
+  --
+  first_name : VARCHAR(50)
+  last_name : VARCHAR(50)
+  email : VARCHAR(100) <<UNIQUE>>
+  created_at : TIMESTAMP
+}
+
+entity "ACCOUNT_TYPES" as account_types {
+  * id : INT
+  --
+  code : VARCHAR(20) <<UNIQUE>>
+  description : VARCHAR(100)
+}
+
+entity "BRANCHES" as branches {
+  * id : INT
+  --
+  code : VARCHAR(20) <<UNIQUE>>
+  name : VARCHAR(100)
+  city : VARCHAR(80)
+  created_at : TIMESTAMP
+}
+
+entity "ACCOUNTS" as accounts {
+  * account_number : VARCHAR(40)
+  --
+  customer_id : VARCHAR(36) <<FK customers.id>>
+  branch_id : INT <<FK branches.id>>
+  type_id : INT <<FK account_types.id>>
+  balance : DECIMAL(18,2)
+  open_date : TIMESTAMP
+}
+
+entity "TRANSACTIONS" as transactions {
+  * id : BIGINT
+  --
+  account_number : VARCHAR(40) <<FK accounts.account_number>>
+  type : VARCHAR(20) <<CHECK 'DEBIT'|'CREDIT'>>
+  amount : DECIMAL(18,2) <<CHECK > 0>>
+  created_at : TIMESTAMP
+}
+
+entity "USERS" as users {
+  * id : INT
+  --
+  username : VARCHAR(50) <<UNIQUE>>
+  password_hash : VARCHAR(255)
+  role : VARCHAR(20) <<CHECK 'ADMIN'|'CLERK'>>
+  created_at : TIMESTAMP
+}
+
+customers ||--o{ accounts : owns
+branches ||--o{ accounts : serves
+account_types ||--o{ accounts : categorises
+accounts ||--o{ transactions : logs
+
+@enduml

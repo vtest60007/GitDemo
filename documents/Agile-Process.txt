@@ -1,0 +1,17 @@
+Agile -- Scrum methodology
+
+Product Owner ---> Requirements ---> Epics ---> UserStories  ---> Product Backlog ---> Product Backlog Items
+
+
+Scrum Master --->  Process to be followed ---> deals with challenges faced be the team
+
+
+Scrum Team --> QA,Dev,BA
+
+
+----> Release date (duration) ---> 1 month
+
+duration of 1 to 2 weeks ---> Sprint ---> working software( developement, testing ) ---> feedback from customer on the working software delivered
+
+
+Sprint Planning ---> 

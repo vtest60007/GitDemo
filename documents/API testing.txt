@@ -1,0 +1,36 @@
+API Testing
+
+API -- Application program interface
+
+--- UI -- 
+--- Database -- 
+
+Services --> Web services -- API's 
+
+insert
+update
+delete
+
+http--> request -->  methods
+
+-- Post --->> Creation 
+--> Get --- Retrival
+--> put ---> updation 
+---> delete --> delete resources
+
+---> Patch ---> partial updation
+
+--> Https Status codes -->
+
+-------------
+https://imdbapi.dev/ -- Base URI
+
+https://imdbapi.dev/titles
+
+
+different types of API
+
+Soap  -- XML -- Secure --> entire application is down
+Rest -- JSON --->   State less
+
+Https Methods -- Https status code

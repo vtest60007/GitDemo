@@ -1,0 +1,44 @@
+Technologies Used for Developing Distributed Applications
+=========================================================
+* Nowadays we all use Web APIs and microservices for developing distributed applications.
+* Do you know the other technologies which were used before Web API or the alternative technologies for Web API?
+1) RPC (Remote Procedure Call): Used in languages like C, C++ etc.
+   + RPC is language-neutral and used to call remote procedures(functions)
+   + It uses binary format for serialization/deserialization
+   + It uses protocols like TCP and UDP
+2) RMI (Remote Procedure Call): Used in Java
+   + RMI is Java-specific and used to call methods(functions inside a Java class)
+   + It uses binary format for serialization/deserialization of objects
+   + It uses Java-specific protocols like JRMP and IIOP
+3) CORBA (Common Request Broker Architecture): Used in old languages
+   + CORBA is an industry-standard, vendor-independent specification designed by the Object Management Group(OMG)
+   + The Internet Inter-ORB Protocol (IIOP) allows CORBA objects to interoperate over networks 
+   + It uses IDL(Interface Definition Language), a language-independent syntax
+4) EJB (Enterprise JavaBeans): Used in J2EE
+   + EJB is Java-specific and requires a container web server like JBoss, WebLogic, Glassfish etc
+   + EJB is built on top of RMI(specifically RMI-IIOP) 
+   + It is better for large-scale systems
+5) DCOM: Used in languages like VB(Visual Basic), VC++(Visual C++) etc (in 1990s before .NET)
+   + DCOM is Microsoft-specific, language-agnostic, and works primarily within the Windows ecosystem
+   + It uses Microsoft’s specialized DCOM/RPC protocols
+   + Used when integrating legacy Windows applications or in scenarios strictly limited to a Windows infrastructure
+6) XML Web Services: Developed by Microsoft and used in .NET Framework(since v1.0) and Java
+   + XML Web Service is language-neutral
+   + It uses SOAP(Simple Object Access Protocol), which is based on XML, as the message protocol and HTTP as the transport protocol
+   + This was the first technology based on WWW(World Wide Web)
+7) WCF (Windows Communication Foundation): Used in .NET Framework since v3.0 which was released in 2006
+   + WCF is .NET-specific
+   + It can use any message protocol(SOAP, Binary etc) and any transport protocol(HTTP, TCP etc)
+   + It supports Request-Response pattern and also Duplex(two way) communication pattern
+8) Web API: Used in all modern languages
+   + Web API is language-neutral and consists of HTTP methods like GET, POST, PUT, PATCH, DELETE etc
+   + It uses XML or JSON (or custom formats) for serialization/deserialization of objects
+   + It can use only HTTP or HTTPS protocols
+9) gRPC (Google RPC): Developed by Google and best suitable for Internal microservices 
+   + gRPC is a high-performance framework to "call" functions on a remote server as if they were local
+   + It uses binary format
+   + It strictly requires HTTP/2
+10) GraphQL (Graph Query Language): Developed by Facebook and best suitable as an external gateway to provide a flexible interface for web and mobile clients
+   + GraphQL allows clients to request exactly what they need from a single endpoint
+   + Best for public APIs and complex frontend applications (web/mobile) with diverse data requirements
+   + Eliminates "over-fetching" (getting more data than needed) and "under-fetching" (needing multiple calls for one view)

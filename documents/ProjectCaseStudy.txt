@@ -1,0 +1,84 @@
+https://genome.ucsc.edu/
+
+Case Study: UCSC Genome Browser Automation
+Problem Statement
+Automate the process of searching for a gene and verifying its details in the UCSC Genome Browser application.
+
+Suggested Site
+https://genome.ucsc.edu/
+
+Detailed Description
+Open the browser.
+
+Enter the URL https://genome.ucsc.edu/.
+
+Click on Genome Browser link in the top navigation.
+
+In the Search Term text box, enter a gene name (e.g., BRCA1).
+
+Select a genome assembly (e.g., Human Dec. 2013 (GRCh38/hg38)) from the Genome/Assembly dropdown.
+
+Click on Submit or Go button.
+
+Verify that the genome browser loads with the gene track displayed.
+
+Confirm that the gene name appears in the results header.
+
+Close the browser.
+
+Key Automation Scope
+Cross-browser testing: Run on Chrome and Firefox.
+
+Input controls: Handle text boxes (Search Term), dropdowns (Genome Assembly).
+
+Precise element location: Use IDs, CSS selectors, or XPath.
+
+Exception handling: Manage invalid gene names or missing assemblies.
+
+Validation: Ensure gene track is displayed correctly.
+
+
+
+
+
+https://symptoms.webmd.com/
+
+
+Case Study: Symptom Checker Automation
+Problem Statement
+Automate the process of finding possible conditions using the WebMD Symptom Checker.
+
+Suggested Site
+https://symptoms.webmd.com/
+
+Detailed Description
+Open the browser.
+
+Enter the URL https://symptoms.webmd.com/.
+
+Enter Age in the text box (e.g., 30).
+
+Select Gender (Male/Female).
+
+Click on Continue button.
+
+On the body map page, click on a body part (e.g., Head).
+
+Select a symptom (e.g., Headache).
+
+Click on Done or proceed to results.
+
+Verify that possible conditions are displayed.
+
+Close the browser.
+
+Key Automation Scope
+Cross-browser testing: Run on Chrome and Firefox.
+
+Input controls: Handle text boxes (Age), radio buttons (Gender), clickable body map, and symptom checkboxes.
+
+Precise element location: Use IDs, CSS selectors, or XPath.
+
+Exception handling: Manage invalid inputs (e.g., blank age, non-numeric age).
+
+Dropdowns/Selections: Handle body part and symptom selection lists.

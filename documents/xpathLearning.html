@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:ex="http://example.com/ns">
+<head>
+  <meta charset="UTF-8">
+  <title>XPath Playground with Cheat Sheet</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; display: flex; }
+    main { flex: 3; margin-right: 20px; }
+    aside { flex: 1; border-left: 2px solid #ccc; padding-left: 15px; background: #f9f9f9; }
+    section { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }
+    h1 { color: darkblue; }
+    .highlight { background-color: yellow; border: 1px solid orange; }
+    #results { margin-top: 15px; font-weight: bold; }
+    #stringOutput { margin-top: 10px; font-style: italic; color: darkgreen; }
+    aside h2 { margin-top: 0; }
+    aside code { background: #eee; padding: 2px 4px; cursor: pointer; }
+    aside li { margin-bottom: 8px; }
+    .controls { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="main-title">XPath Playground</h1>
+
+    <p>Type an XPath expression below or click an example. Matching elements will be highlighted. String results will appear below.</p>
+    <div class="controls">
+      <input type="text" id="xpathInput" size="50" placeholder="//ancestor::section">
+      <button onclick="runXPath()">Run</button>
+      <button onclick="clearHighlights()">Clear Highlights</button>
+    </div>
+    <div id="results"></div>
+    <div id="stringOutput"></div>
+
+    <section id="axis-demo">
+      <h2>Axis Demo Section</h2>
+      <div class="container">
+        <ul>
+          <li id="item1">Item 1</li>
+          <li id="item2">Item 2</li>
+          <li id="item3">Item 3</li>
+        </ul>
+        <p class="note">This is a note inside the container.</p>
+      </div>
+    </section>
+
+    <section id="nested">
+      <h2>Nested Elements</h2>
+      <div>
+        <span>
+          <strong id="deep">Deep Nested Element</strong>
+        </span>
+      </div>
+    </section>
+
+    <!-- Comment node -->
+    <!-- This is a sample comment -->
+    <?xml-stylesheet type="text/css" href="style.css"?>
+
+    <section id="namespaces">
+      <h2>Namespaces</h2>
+      <ex:item ex:code="123">Namespaced Item</ex:item>
+      <ex:item ex:code="456">Another Namespaced Item</ex:item>
+    </section>
+
+    <section id="functions">
+      <h2>Functions</h2>
+      <p id="whitespace">   Trim me   </p>
+      <p id="translate">ABC DEF</p>
+      <p id="substring">HelloWorld</p>
+      <a href="https://example.com">External Link</a>
+    </section>
+  </main>
+
+  <aside>
+    <h2>XPath Cheat Sheet (click to copy)</h2>
+    <ul>
+      <li><code>//h1</code> → all h1 elements</li>
+      <li><code>//ul/li[1]</code> → first li in each ul</li>
+      <li><code>//ul/li[last()]</code> → last li in each ul</li>
+      <li><code>//a[contains(@href,'://')]</code> → external links</li>
+      <li><code>//li[@id='item2']/ancestor::section</code> → ancestor section of item2</li>
+      <li><code>//strong[@id='deep']/parent::span</code> → parent span of strong</li>
+      <li><code>//li[@id='item1']/following-sibling::li</code> → siblings after item1</li>
+      <li><code>//comment()</code> → comment nodes</li>
+      <li><code>//processing-instruction()</code> → processing instructions</li>
+      <li><code>//div/text()</code> → text nodes inside div</li>
+      <li><code>//ex:item</code> → namespaced elements</li>
+      <li><code>normalize-space(//p[@id='whitespace'])</code> → trims whitespace (string result)</li>
+      <li><code>substring(//p[@id='substring']/text(),1,5)</code> → first 5 chars (string result)</li>
+      <li><code>translate(//p[@id='translate']/text(),'ABC','XYZ')</code> → replace chars (string result)</li>
+    </ul>
+  </aside>
+
+  <script>
+    function runXPath() {
+      clearHighlights();
+      const expr = document.getElementById('xpathInput').value;
+      let resultsBox = document.getElementById('results');
+      let stringBox = document.getElementById('stringOutput');
+      resultsBox.textContent = "";
+      stringBox.textContent = "";
+
+      try {
+        const evaluator = new XPathEvaluator();
+        const nsResolver = evaluator.createNSResolver(document.documentElement);
+
+        // Try evaluating as nodes first
+        let result = evaluator.evaluate(expr, document, nsResolver, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+
+        if (result.snapshotLength > 0) {
+          resultsBox.textContent = `Matched ${result.snapshotLength} node(s).`;
+          for (let i = 0; i < result.snapshotLength; i++) {
+            const node = result.snapshotItem(i);
+            if (node.nodeType === 1) {
+              node.classList.add('highlight');
+            }
+          }
+        } else {
+          // If no nodes, try evaluating as string/number/boolean
+          let strResult = evaluator.evaluate(expr, document, nsResolver, XPathResult.STRING_TYPE, null);
+          if (strResult.stringValue) {
+            stringBox.textContent = `String result: "${strResult.stringValue}"`;
+          } else {
+            let numResult = evaluator.evaluate(expr, document, nsResolver, XPathResult.NUMBER_TYPE, null);
+            if (!isNaN(numResult.numberValue)) {
+              stringBox.textContent = `Number result: ${numResult.numberValue}`;
+            } else {
+              let boolResult = evaluator.evaluate(expr, document, nsResolver, XPathResult.BOOLEAN_TYPE, null);
+              stringBox.textContent = `Boolean result: ${boolResult.booleanValue}`;
+            }
+          }
+        }
+      } catch (e) {
+        resultsBox.textContent = "Invalid XPath: " + e.message;
+      }
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+      document.getElementById('results').textContent = "";
+      document.getElementById('stringOutput').textContent = "";
+    }
+
+    // Enable click-to-copy for cheat sheet examples
+    document.querySelectorAll("aside code").forEach(codeEl => {
+      codeEl.addEventListener("click", () => {
+        document.getElementById("xpathInput").value = codeEl.textContent;
+        runXPath(); // auto-run on click
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+Java 
+----------------
+History & Features of Java: OOP, platform independence, JVM, JDK, JRE
+Data Types: Primitive and non-primitive types, Variable declaration, Type casting
+Object-Oriented Principles: Encapsulation, Inheritance, Polymorphism, Abstraction
+Classes and Objects: Class structure, Object creation, Instance variables
+Constructors: Default constructor, Parameterized constructor, Constructor overloading
+Inheritance: Single inheritance, Multilevel inheritance, super keyword
+Polymorphism: Method overloading, Method overriding
+Abstraction: Abstract classes, Interfaces
+Encapsulation: Access modifiers (public, private, protected), Encapsulating data
+Static Members: Static variables, Static methods, Static blocks
+this and super: Referring current object, Accessing parent class methods
+final Keyword: Final variables, Final methods, Final classes
+Arrays: One-dimensional array, Multidimensional array
+Strings:String class, String methods: length, substring, equals, etc.
+StringBuffer & StringBuilder
+Types of Exceptions: Checked exceptions, Unchecked exceptions
+try-catch Block: Single try-catch, Multiple catch, finally block
+throw and throws: Manually throwing exceptions
+Introduction to Collections: Collection hierarchy, Collection interfaces (List, Set, Map)
+Introduction to Threads: Thread vs Process
+Thread Methods: sleep(), join(), start(), run()
+File Handling: File class, File reading and writing (FileInputStream, FileOutputStream)
+
+-----------------------
+SQL
+--------------------------
+1	Database objects	
+Schema, Tables
+
+2	Data Manipulation Language	Simple : INSERT, UPDATE, DELETE
+3	Select - Basic	Simple Select * From Table type
+4	Select - Joins	
+INNER JOIN, OUTER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN
+
+5	Operators	Arithmetic, Comparison, Logical
+6	Functions 1	
+ CONCAT, AVG, MIN, MAX
+
+7	Filter Expressions/Predicate	Order By, Group By, Having
+
+
+-------------------
+Manual Testing
+------------------
+
+Functional testing which covers all types of testing
+Learn Agile and Jira
+STLC: Test Planning, Test Development, Test Execution, Result Analysis, Bug Tracking and Reporting, Test Closure Activity
+Types of Testing (Unit testing, integration testing, Regression testing, etc.,)
+Automated functional tests for both front-end and back-end code
+Agile Testing + Jira Tool
+
+	Introduciton to Functional Testing	What and Why of Software Testing. Importance of s/w testing with examples of how much impactful it is to business in the digital world, to cost.
+	Introduction to Test Levels	Testing at different levels (unit, system, system integration, UAT)
+Test Types	Choice of black, white box \with functional and non-functional testing
+	Test Design and development	
+Overview of test design, test scenarios, need of RTM, Test case development techniques - Boundary Value Analysis, Equivalence Partitioning, Decision Table.
+Walkthrough on sample test cases.
+	Write Test Cases	Write test cases for test scenarios
+	Test Data	Importance of test data in test design with example of test data
+	
+-----------------
+Selenium
+----------------
+Selenium WebDriver
+Locating various elements(Id, Name, LinkText, PartialLinkText, ClassName, CSS Selector)
+Relative Locators 
+Locating By XPath(Absolute, Relative)
+Handling DropDown
+Find Radio Element
+Find Element by Tag Name
+TextFields and Buttons
+FindElement vs FIndElements
+Handling frames and windows
+Switching to frames and iFrames
+Types of waits(Implicit, Explicit)
+Checkbox handling
+Form Submission
+alerts
+ScreenShot
+Get Method, Conditional Methods, Browser Methods, Wait Methods, Navigational Methods
+DatePicker(Actions class)
+Apache POI - Read Operation

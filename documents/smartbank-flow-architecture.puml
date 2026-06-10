@@ -1,0 +1,51 @@
+
+@startuml
+skinparam rectangle {
+  BackgroundColor #F0F8FF
+  BorderColor #333333
+}
+skinparam arrowColor #3355AA
+
+rectangle "CLI Layer (Main.java)" as CLI {
+  note right: Handles input
+Displays menu
+}
+
+rectangle "Service Layer" as S {
+  rectangle "AccountService" as AS
+  rectangle "TransferService" as TS
+  rectangle "ReportsService" as RS
+}
+
+rectangle "In-Memory Repository
+(BankRepository)" as R
+rectangle "Persistence Layer (DAOs)
+CustomerDao, AccountDao, TransactionDao" as DAO
+rectangle "Database (MySQL)
+customers, accounts, transactions" as DB
+
+rectangle "Observers
+EmailNotifier, SmsNotifier" as OBS
+rectangle "Utilities
+AuditLogger, PropertyLoader, AnnotationAuditor" as U
+rectangle "Data Loaders
+DataLoader, CSV Loader" as DL
+
+CLI --> S : user commands
+S --> R : collections operations
+S --> DAO : CRUD via PreparedStatement
+DAO --> DB : JDBC connection (DbConnectionManager)
+S ..> OBS : notifications
+S ..> U : logging/config/auditing
+S ..> DL : seed data
+
+note bottom of TS
+Transactions with commit/rollback
+savepoints
+end note
+
+note bottom of RS
+Streams/Lambdas for reports
+end note
+
+@enduml

@@ -1,0 +1,9 @@
+git config --global user.name "Venkatesh G Iyengar"
+git config --global user.email vtest6007@gmail.com
+
+
+
+
+git commit --amend --author="Venkatesh G Iyengar <vtest6007@gmail.com>" --no-edit
+
+git push -u origin master

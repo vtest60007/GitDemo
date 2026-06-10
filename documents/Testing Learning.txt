@@ -1,0 +1,43 @@
+Topics Covered
+------------
+1. What is Testing?
+2. What is Software?
+3. Types of Software? - Application Software (Web Applications, Desktop Applications,Mobile Applications), System Software and Programming software
+4. Types of Companies? - Product and Project based 
+5. How the product and services based companies gets requirements?
+6. SDLC -- Waterfall , V & V model
+7. Levels of Testing
+8. Different Enviornments - Dev, QA, Staging and Production
+9. Types of Integration Testing -- Unit/Component Integration testing and System Integration Testing
+10. Types of System Testing - Functional and Non-Functional (Performance,Security, User Experience, Usability, Accessbility Testing,Compatabilty Testing)
+11. Types of User Acceptance Testing(UAT) -- Alpha and Beta Testing
+12. Types of Testing (in terms of knowledge of coding used in creating the application) --Black box testing (No coding knowledge) and 
+White box testing (Code knowldege - test the code of the application for program specifications),
+ Greybox box testing (coding knowldege but gonna testing only the user requirements)
+------------------------
+STLC -- Software Testing Life Cycle
+-------------------------------------
+Requirements --- Gathering of Requirements(which stage of the project join)
+ intial stage of project  -- involvement during the gathering of requirements from the client/customers (Depends of SDLC followed)(conference calls)
+ intermediate stage of project -- (testing is going on) -- understand the requirements from BRS, SRS (requirements documents)
+     --- shadowing with experienced team mates so that you can contribute to the project right away.
+	 
+	 
+	 -- Analysis of Requirements --> Clarification log --
+	 
+
+
+Test Planning and Strategy ---
+
+for the given requirements for Advantage shopping -- Functional, Performance, Security,Compatabilty
+ --> Functional and Compatabilty
+ 
+ Test Plan document
+ 
+ --->
+ 
+ Test Development /Test Design  -->  
+ 
+ HLD --> Test Scenario   --> What to test (features)  -- > Long term Goal
+ 
+ LLD --> Test Cases  ----> How to Test  ---> Short Term Goals

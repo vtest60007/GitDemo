@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Playground</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; display: flex; }
+    main { flex: 3; margin-right: 20px; }
+    aside { flex: 1; border-left: 2px solid #ccc; padding-left: 15px; background: #f9f9f9; }
+    section { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }
+    h1 { color: darkblue; }
+    .highlight { outline: 2px solid orange; background-color: #ffffcc; }
+    #results { margin-top: 15px; font-weight: bold; }
+    aside h2 { margin-top: 0; }
+    aside code { background: #eee; padding: 2px 4px; cursor: pointer; }
+    aside li { margin-bottom: 8px; }
+    .controls { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="main-title">CSS Selector Playground</h1>
+
+    <p>Type a CSS selector below or click an example. Matching elements will be highlighted.</p>
+    <div class="controls">
+      <input type="text" id="cssInput" size="50" placeholder=".container > ul li:first-child">
+      <button onclick="runCSS()">Run</button>
+      <button onclick="clearHighlights()">Clear Highlights</button>
+    </div>
+    <div id="results"></div>
+
+    <section class="container">
+      <h2>Selectors Demo</h2>
+      <div class="parent">
+        <div class="child">Child 1</div>
+        <div class="child sibling">Child 2 (sibling)</div>
+        <div class="child">Child 3</div>
+      </div>
+      <ul>
+        <li class="box item">Item 1</li>
+        <li class="item">Item 2</li>
+        <li class="item">Item 3</li>
+      </ul>
+      <a href="/index.html">Relative Link</a>
+      <a href="file.doc">Document Link</a>
+      <a href="https://example.com">External Link</a>
+      <input type="checkbox" checked>
+      <input type="text" disabled>
+      <p id="empty"></p>
+    </section>
+  </main>
+
+  <aside>
+    <h2>CSS Cheat Sheet (click to copy)</h2>
+    <ul>
+      <li><code>*</code> → all elements</li>
+      <li><code>div</code> → element selector</li>
+      <li><code>.child</code> → class selector</li>
+      <li><code>#main-title</code> → ID selector</li>
+      <li><code>[disabled]</code> → attribute selector</li>
+      <li><code>.parent > .child</code> → direct descendant</li>
+      <li><code>.child + .sibling</code> → adjacent sibling</li>
+      <li><code>.child ~ .sibling</code> → general sibling</li>
+      <li><code>[href$='.doc']</code> → ends with</li>
+      <li><code>[href^='/index']</code> → begins with</li>
+      <li><code>[class*='box']</code> → contains substring</li>
+      <li><code>:first-child</code> → first child</li>
+      <li><code>:last-child</code> → last child</li>
+      <li><code>:nth-child(2)</code> → second child</li>
+      <li><code>:only-child</code> → only child</li>
+      <li><code>:checked</code> → checked inputs</li>
+      <li><code>:disabled</code> → disabled inputs</li>
+      <li><code>:empty</code> → empty elements</li>
+    </ul>
+  </aside>
+
+  <script>
+    function runCSS() {
+      clearHighlights();
+      const selector = document.getElementById('cssInput').value;
+      let resultsBox = document.getElementById('results');
+      resultsBox.textContent = "";
+
+      try {
+        const nodes = document.querySelectorAll(selector);
+        if (nodes.length === 0) {
+          resultsBox.textContent = "No matches found.";
+        } else {
+          resultsBox.textContent = `Matched ${nodes.length} element(s).`;
+          nodes.forEach(node => node.classList.add('highlight'));
+        }
+      } catch (e) {
+        resultsBox.textContent = "Invalid CSS selector: " + e.message;
+      }
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+      document.getElementById('results').textContent = "";
+    }
+
+    // Enable click-to-copy for cheat sheet examples
+    document.querySelectorAll("aside code").forEach(codeEl => {
+      codeEl.addEventListener("click", () => {
+        document.getElementById("cssInput").value = codeEl.textContent;
+        runCSS(); // auto-run on click
+      });
+    });
+  </script>
+</body>
+</html>

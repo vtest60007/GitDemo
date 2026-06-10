@@ -1,0 +1,214 @@
+---
+
+# 📘 User API Documentation
+
+## Base URL
+```
+http://localhost:3000
+```
+
+---
+
+## 🔑 Authentication
+- Most endpoints require a **JWT token** in the `Authorization` header:
+  ```
+  Authorization: Bearer <token>
+  ```
+- You obtain this token by logging in.
+
+---
+
+## 1. **Signup**
+
+- **Endpoint**: `POST /auth/signup`
+- **Description**: Register a new user.
+- **Headers**:
+  ```
+  Content-Type: application/json
+  ```
+- **Request Body**:
+```json
+{
+  "username": "johndoe",
+  "email": "john@example.com",
+  "password": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "age": 30
+}
+```
+- **Response Example**:
+```json
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "username": "johndoe",
+    "email": "john@example.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+## 2. **Login**
+
+- **Endpoint**: `POST /auth/login`
+- **Description**: Authenticate user and return JWT.
+- **Headers**:
+  ```
+  Content-Type: application/json
+  ```
+- **Request Body**:
+```json
+{
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+```
+- **Response Example**:
+```json
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "username": "johndoe",
+    "email": "john@example.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+## 3. **Get All Users (Admin Only)**
+
+- **Endpoint**: `GET /user/`
+- **Description**: Retrieve all users (requires `ADMIN` role).
+- **Headers**:
+  ```
+  Authorization: Bearer <token>
+  ```
+- **Response Example**:
+```json
+[
+  { "id": 1, "username": "johndoe", "email": "john@example.com", "role": "USER" },
+  { "id": 2, "username": "admin", "email": "admin@example.com", "role": "ADMIN" }
+]
+```
+
+---
+
+## 4. **Get User by ID**
+
+- **Endpoint**: `GET /user/:id`
+- **Description**: Retrieve a single user by ID.
+- **Headers**:
+  ```
+  Authorization: Bearer <token>
+  ```
+- **Response Example**:
+```json
+{
+  "id": 1,
+  "username": "johndoe",
+  "email": "john@example.com",
+  "role": "USER"
+}
+```
+
+---
+
+## 5. **Update User**
+
+- **Endpoint**: `PATCH /user/:id`
+- **Description**: Update user details (authenticated).
+- **Headers**:
+  ```
+  Authorization: Bearer <token>
+  Content-Type: application/json
+  ```
+- **Request Body**:
+```json
+{
+  "username": "newname",
+  "age": 25
+}
+```
+- **Response Example**:
+```json
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "username": "newname",
+    "email": "john@example.com",
+    "age": 25
+  }
+}
+```
+
+---
+
+## 6. **Delete User (Admin Only)**
+
+- **Endpoint**: `DELETE /user/:id`
+- **Description**: Delete a user by ID (requires `ADMIN` role).
+- **Headers**:
+  ```
+  Authorization: Bearer <token>
+  ```
+- **Response Example**:
+```json
+{
+  "success": true,
+  "message": "User deleted successfully"
+}
+```
+
+---
+
+## 7. **Change User Role (Admin Only)**
+
+- **Endpoint**: `PATCH /user/change-role/:id`
+- **Description**: Change a user’s role (requires `ADMIN` role).
+- **Headers**:
+  ```
+  Authorization: Bearer <token>
+  Content-Type: application/json
+  ```
+- **Request Body**:
+```json
+{
+  "role": "ADMIN"
+}
+```
+- **Response Example**:
+```json
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "username": "johndoe",
+    "role": "ADMIN"
+  }
+}
+```
+
+---
+
+## 🧪 Testing Notes
+- Use **Postman**:
+  - Select **POST** for signup/login.
+  - Select **GET/PATCH/DELETE** for user endpoints.
+  - Always set `Content-Type: application/json` for requests with a body.
+  - Add `Authorization: Bearer <token>` for protected routes.
+- Common error responses:
+  - `401 Unauthorized` → Missing/invalid token.
+  - `403 Forbidden` → Insufficient role.
+  - `404 Not Found` → User doesn’t exist.
+  - `500 Internal Server Error` → Usually means `req.body` wasn’t parsed (fix with `app.use(express.json())`).
+
+---
+

@@ -1,0 +1,119 @@
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class JsExecutorFailures {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("file:///path/to/scenarios.html"); // update path
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Scenario 1: Hidden element
+        try {
+            driver.findElement(By.id("hiddenBtn")).click(); // FAILS: not interactable
+        } catch (Exception e) {
+            System.out.println("Normal click failed: " + e.getMessage());
+            js.executeScript("arguments[0].click();", driver.findElement(By.id("hiddenBtn")));
+        }
+
+        // Scenario 2: Scroll into view
+        try {
+            driver.findElement(By.id("scrollTarget")).click(); // FAILS if off-screen
+        } catch (Exception e) {
+            System.out.println("Click failed due to off-screen: " + e.getMessage());
+            js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.id("scrollTarget")));
+        }
+
+        // Scenario 3: Set value
+        try {
+            driver.findElement(By.id("textInput")).sendKeys("Hello"); // Works unless disabled/hidden
+        } catch (Exception e) {
+            js.executeScript("arguments[0].value='Hello via JS';", driver.findElement(By.id("textInput")));
+        }
+
+        // Scenario 7: Disabled element
+        try {
+            driver.findElement(By.id("disabledBtn")).click(); // FAILS: disabled
+        } catch (Exception e) {
+            System.out.println("Disabled click failed: " + e.getMessage());
+            js.executeScript("arguments[0].removeAttribute('disabled');", driver.findElement(By.id("disabledBtn")));
+            driver.findElement(By.id("disabledBtn")).click();
+        }
+
+        // Scenario 9: Shadow DOM
+        try {
+            driver.findElement(By.cssSelector("#shadowBtn")).click(); // FAILS: not found
+        } catch (Exception e) {
+            System.out.println("Shadow DOM access failed: " + e.getMessage());
+            WebElement shadowBtn = (WebElement) js.executeScript(
+                "return document.querySelector('#shadowHost').shadowRoot.querySelector('#shadowBtn');"
+            );
+            shadowBtn.click();
+        }
+
+        // Scenario 14: Iframe
+        try {
+            driver.findElement(By.id("frameText")).getText(); // FAILS: not in default context
+        } catch (Exception e) {
+            System.out.println("Iframe access failed: " + e.getMessage());
+            String text = (String) js.executeScript("return window.frames[0].document.getElementById('frameText').innerText;");
+            System.out.println("Iframe text via JS: " + text);
+        }
+
+        // Scenario 15: Mouse Events
+        try {
+            new org.openqa.selenium.interactions.Actions(driver)
+                .moveToElement(driver.findElement(By.id("hoverBtn"))).perform(); // Sometimes fails
+        } catch (Exception e) {
+            js.executeScript("arguments[0].dispatchEvent(new MouseEvent('mouseover',{bubbles:true}));",
+                driver.findElement(By.id("hoverBtn")));
+        }
+
+        // Scenario 16: Local Storage
+        try {
+            // No direct WebDriver API
+            System.out.println("LocalStorage not accessible via WebDriver");
+        } finally {
+            String token = (String) js.executeScript("return window.localStorage.getItem('token');");
+            System.out.println("Token via JS: " + token);
+        }
+
+        // Scenario 17: Page Dimensions
+        try {
+            System.out.println("No WebDriver API for scrollHeight");
+        } finally {
+            Long height = (Long) js.executeScript("return document.body.scrollHeight;");
+            System.out.println("Page height: " + height);
+        }
+
+        // Scenario 18: Drag and Drop
+        try {
+            WebElement src = driver.findElement(By.id("dragSource"));
+            WebElement tgt = driver.findElement(By.id("dragTarget"));
+            new org.openqa.selenium.interactions.Actions(driver).dragAndDrop(src, tgt).perform(); // Often fails
+        } catch (Exception e) {
+            System.out.println("Drag and drop failed: " + e.getMessage());
+            js.executeScript(
+                "function simulateDragDrop(sourceNode,destinationNode){var event=new DragEvent('dragstart',{bubbles:true});sourceNode.dispatchEvent(event);var dropEvent=new DragEvent('drop',{bubbles:true});destinationNode.dispatchEvent(dropEvent);} simulateDragDrop(arguments[0],arguments[1]);",
+                driver.findElement(By.id("dragSource")), driver.findElement(By.id("dragTarget"))
+            );
+        }
+
+        // Scenario 19: Infinite Scroll
+        try {
+            System.out.println("WebDriver cannot trigger lazy load directly");
+        } finally {
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        }
+
+        // Scenario 20: Network Requests
+        try {
+            System.out.println("WebDriver cannot capture network requests");
+        } finally {
+            js.executeScript("console.log('Intercept via JS');");
+        }
+
+        driver.quit();
+    }
+}

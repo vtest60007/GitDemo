@@ -1,0 +1,11 @@
+https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/
+
+https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/
+
+https://resources.github.com/learn/pathways/copilot/essentials/how-github-copilot-handles-data/
+
+https://github.com/features/copilot/tutorials
+
+https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook
+
+https://patterns.hattori.dev/general/object-generation-from-structured-data/

@@ -1,0 +1,32 @@
+
+@startuml
+entity "CUSTOMERS" as customers {
+  * id : VARCHAR(36)
+  --
+  first_name : VARCHAR(50)
+  last_name : VARCHAR(50)
+  email : VARCHAR(100) <<UNIQUE>>
+  created_at : TIMESTAMP
+}
+
+entity "ACCOUNTS" as accounts {
+  * account_number : VARCHAR(40)
+  --
+  customer_id : VARCHAR(36) <<FK customers.id>>
+  type : ENUM('SAVINGS','CURRENT')
+  balance : DECIMAL(18,2)
+  open_date : TIMESTAMP
+}
+
+entity "TRANSACTIONS" as transactions {
+  * id : BIGINT
+  --
+  account_number : VARCHAR(40) <<FK accounts.account_number>>
+  type : VARCHAR(20)
+  amount : DECIMAL(18,2)
+  created_at : TIMESTAMP
+}
+
+customers ||--o{ accounts : owns
+accounts ||--o{ transactions : logs
+@enduml

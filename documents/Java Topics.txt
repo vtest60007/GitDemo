@@ -1,0 +1,106 @@
+Day 1
+
+---
+
+### **History & Features of Java**
+- OOP  
+- Platform independence  
+- JVM  
+- JDK  
+- JRE  
+
+### **Data Types**
+- Primitive and non-primitive types  
+- Variable declaration  
+- Type casting  
+
+### **Object-Oriented Principles**
+- Encapsulation  
+- Inheritance  
+- Polymorphism  
+- Abstraction  
+
+### **Classes and Objects**
+- Class structure  
+- Object creation  
+- Instance variables  
+
+### **Constructors**
+- Default constructor  
+- Parameterized constructor  
+- Constructor overloading  
+
+---
+
+Day 2
+
+Inheritance: Single inheritance, Multilevel inheritance, super keyword
+Polymorphism: Method overloading, Method overriding
+Abstraction: Abstract classes, Interfaces
+Encapsulation: Access modifiers (public, private, protected), Encapsulating data
+
+Day 3
+
+this and super: Referring current object, Accessing parent class methods
+Static Members: Static variables, Static methods, Static blocks
+Final Keyword: Final variables, Final methods, Final classes
+Arrays: One-dimensional array, Multidimensional array, Array traversal and operations
+Strings: String class, Immutability, String methods: length, substring, equals, etc
+
+Day 4
+
+StringBuffer & StringBuilder: Mutability, Common methods: append, insert, delete
+Types of Exceptions: Checked exceptions, Unchecked exceptions
+try-catch Block: Single try-catch, Multiple catch, finally block
+throw and throws: Manually throwing exceptions, Propagating exceptions
+
+Day 5
+
+Custom Exceptions: Creating custom exceptions
+Introduction to Collections: Collection hierarchy, Collection interfaces (List, Set, Map)
+List Interface: ArrayList, LinkedList, Vector, Stack
+
+Day 6
+
+Set Interface: HashSet, LinkedHashSet, TreeSet
+Map Interface: HashMap, LinkedHashMap, TreeMap, Hashtable
+Iterator: Iterator, ListIterator
+
+Day 7
+
+Comparable & Comparator: Sorting with Comparable, Sorting with Comparator
+Introduction to Threads: Thread vs Process, Thread lifecycle
+Creating Threads: Extending Thread class, Implementing Runnable interface
+Thread Methods: sleep(), join(), start(), run()
+Character Streams: FileReader, FileWriter, BufferedReader, BufferedWriter
+
+Day 8
+
+File Handling: File class, File reading and writing (FileInputStream, FileOutputStream)
+JDBC API Overview: JDBC architecture, Driver Manager, Statement and PreparedStatement
+CRUD Operations: Insert, Update, Delete, Select Queries
+Transactions: Commit, Rollback, Savepoints
+
+Day 9
+
+Lambda Expressions: Lambda syntax, Functional interfaces
+Stream API: Stream operations (filter, map, reduce)
+Optional Class: Avoiding NullPointerException with Optional
+Generics: Generic classes, methods & wildcards
+
+Day 10
+
+Annotations: Built-in annotations (@Override, @Deprecated) & Custom annotations
+Design Patterns: Singleton, Factory, Observer, Strategy patterns
+
+Day 11 & 12
+
+Java 8 Features - Streams and Optionals. Asynchronous and Parallel Programming in Java 8.
+Collections Framework (aka Data Structures)
+Generics
+
+Day 13
+
+
+
+
